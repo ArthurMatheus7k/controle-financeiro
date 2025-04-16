@@ -1,0 +1,238 @@
+{% extends 'despesas/base.html' %}
+{% load custom_filters %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2 class="mb-3">Dashboard Financeiro</h2>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{% url 'nova_despesa' %}" class="btn btn-success">
+            <i class="fas fa-plus-circle me-1"></i> Nova Despesa
+        </a>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Selecione o período</h5>
+            </div>
+            <div class="card-body">
+                <form method="get" class="row g-3">
+                    <div class="col-md-5">
+                        <label for="mes" class="form-label">Mês</label>
+                        <select name="mes" id="mes" class="form-select">
+                            {% for m_num, m_nome in meses %}
+                                <option value="{{ m_num }}" {% if m_num == mes_atual %}selected{% endif %}>{{ m_num }} - {{ m_nome }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="ano" class="form-label">Ano</label>
+                        <select name="ano" id="ano" class="form-select">
+                            {% for a in anos %}
+                                <option value="{{ a }}" {% if a == ano_atual %}selected{% endif %}>{{ a }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-filter me-1"></i> Filtrar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-chart-pie me-2"></i>Resumo por Categoria</h5>
+                <div>
+                    <a href="{% url 'exportar_csv' %}?mes={{ mes_atual }}&ano={{ ano_atual }}" class="btn btn-sm btn-outline-light me-2">
+                        <i class="fas fa-file-csv me-1"></i> CSV
+                    </a>
+                    <a href="{% url 'exportar_pdf' %}?mes={{ mes_atual }}&ano={{ ano_atual }}" class="btn btn-sm btn-outline-light">
+                        <i class="fas fa-file-pdf me-1"></i> PDF
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <canvas id="grafico-categorias"></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="mb-3">Total por Categoria:</h6>
+                        <ul class="list-group">
+                            {% for categoria in categorias %}
+                                {% if categoria.total > 0 %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    {{ categoria.nome }}
+                                    <span class="badge bg-primary rounded-pill">R$ {{ categoria.total|floatformat:2 }}</span>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <h5>Total do Mês: <span class="text-primary">R$ {{ total_geral|floatformat:2 }}</span></h5>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-calendar-day me-2"></i>{{ mes_nome }} / {{ ano_atual }}</h5>
+            </div>
+            <div class="card-body">
+                <div class="d-flex flex-column">
+                    {% for categoria in categorias %}
+                        {% if categoria.total > 0 %}
+                        <div class="mb-3">
+                            <h6>{{ categoria.nome }}</h6>
+                            <div class="progress" style="height: 25px;">
+                                <div class="progress-bar categoria-bar" 
+                                     data-total="{{ categoria.total }}"
+                                     data-valor-total="{{ total_geral }}"
+                                     role="progressbar" 
+                                     aria-valuenow="{{ categoria.total }}"
+                                     aria-valuemin="0"
+                                     aria-valuemax="{{ total_geral }}">
+                                    R$ {{ categoria.total|floatformat:2 }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-list me-2"></i>Despesas Registradas</h5>
+            </div>
+            <div class="card-body">
+                {% if despesas %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for despesa in despesas %}
+                            <tr>
+                                <td>{{ despesa.data|date:"d/m/Y" }}</td>
+                                <td>{{ despesa.descricao }}</td>
+                                <td>{{ despesa.categoria.nome }}</td>
+                                <td class="text-end">R$ {{ despesa.valor|floatformat:2 }}</td>
+                                <td>
+                                    <a href="{% url 'editar_despesa' despesa.id %}" class="btn btn-sm btn-warning">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'excluir_despesa' despesa.id %}" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>Nenhuma despesa registrada para este mês.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Dados para o gráfico -->
+<div id="dados-grafico" 
+     data-categorias="{{ categorias_json }}" 
+     style="display:none;"></div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Configurar as barras de progresso
+        document.querySelectorAll('.categoria-bar').forEach(function(barra) {
+            const total = parseFloat(barra.dataset.total || 0);
+            const valorTotal = parseFloat(barra.dataset.valorTotal || 1);
+            const porcentagem = (total / valorTotal) * 100;
+            barra.style.width = porcentagem + '%';
+        });
+
+        // Obter dados JSON do elemento
+        const dadosElemento = document.getElementById('dados-grafico');
+        const dadosJSON = dadosElemento.getAttribute('data-categorias');
+        const categorias = JSON.parse(dadosJSON || '[]');
+        
+        // Preparar dados para o gráfico
+        const nomesCategorias = [];
+        const valoresCategorias = [];
+        
+        // Extrair dados do JSON
+        categorias.forEach(function(cat) {
+            nomesCategorias.push(cat.nome);
+            valoresCategorias.push(cat.total);
+        });
+        
+        // Definir as cores
+        const cores = [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)',
+            'rgba(199, 199, 199, 0.7)',
+            'rgba(83, 102, 255, 0.7)',
+            'rgba(40, 159, 64, 0.7)',
+            'rgba(210, 199, 199, 0.7)'
+        ];
+        
+        // Criar o gráfico
+        const ctx = document.getElementById('grafico-categorias').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: nomesCategorias,
+                datasets: [{
+                    data: valoresCategorias,
+                    backgroundColor: cores,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    });
+</script>
+{% endblock %} 

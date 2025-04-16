@@ -1,0 +1,714 @@
+/* Variáveis de cor */
+:root {
+    --cor-primaria: #34c759;
+    --cor-primaria-hover: #2db54f;
+    --cor-secundaria: #007bff;
+    --cor-texto: #333;
+    --cor-texto-secundario: #666;
+    --cor-fundo: #f5f5f5;
+    --cor-card: #fff;
+    --cor-borda: #e0e0e0;
+    --cor-despesa: #F96262;
+    --cor-receita: #34c759;
+    --sombra-padrao: 0 2px 10px rgba(0,0,0,0.08);
+    --primary-color: #11998e;
+    --primary-light: #66c2bb;
+    --primary-dark: #0c6e67;
+    --secondary-color: #38ef7d;
+    --text-color: #333;
+    --light-text: #767676;
+    --background-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+}
+
+/* Estilos Gerais */
+body {
+    background-color: #f5f7fb;
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    flex: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+/* Navegação */
+.navbar {
+    background-color: #34c759 !important;
+    box-shadow: var(--sombra-padrao);
+    border: none;
+    height: 60px;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: white !important;
+    font-size: 22px;
+}
+
+.navbar-brand i {
+    margin-right: 8px;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.nav-link:hover {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu {
+    border-radius: 8px;
+    box-shadow: var(--sombra-padrao);
+    border: none;
+}
+
+.dropdown-item {
+    padding: 8px 16px;
+}
+
+/* Cards */
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--sombra-padrao);
+    margin-bottom: 24px;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    border-bottom: none;
+    padding: 1rem;
+    background-color: var(--cor-card);
+    font-weight: 600;
+    color: var(--cor-texto);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-footer {
+    background-color: var(--cor-card);
+    border-top: 1px solid var(--cor-borda);
+    padding: 12px 20px;
+}
+
+/* Botões */
+.btn {
+    display: inline-block;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    background-color: #34c759;
+    border-color: #34c759;
+}
+
+.btn-primary:hover {
+    background-color: #2db54f;
+    border-color: #2db54f;
+}
+
+.btn-success {
+    background-color: var(--cor-receita);
+    border-color: var(--cor-receita);
+}
+
+.btn-danger {
+    background-color: var(--cor-despesa);
+    border-color: var(--cor-despesa);
+}
+
+.btn-outline-light {
+    color: var(--cor-texto);
+    border-color: var(--cor-borda);
+    background-color: var(--cor-card);
+}
+
+.btn-outline-light:hover {
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    border-color: var(--cor-borda);
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* Formulários */
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid #ced4da !important;
+    border-radius: 8px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 8px;
+    background-color: #ffffff !important;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(17, 153, 142, 0.25);
+    outline: none;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: var(--text-color);
+}
+
+.form-select {
+    border-radius: 8px;
+    padding: 12px 15px;
+    border: 1px solid var(--cor-borda);
+    height: auto;
+}
+
+/* Dashboard e Cartões */
+.dashboard-header {
+    margin-bottom: 30px;
+}
+
+.dashboard-greeting {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.dashboard-username {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--cor-primaria);
+    margin-bottom: 20px;
+}
+
+.dashboard-card {
+    background-color: var(--cor-card);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    box-shadow: var(--sombra-padrao);
+}
+
+.summary-card {
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: var(--sombra-padrao);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.summary-value {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.summary-label {
+    color: var(--cor-texto-secundario);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.receita-card {
+    color: var(--cor-receita);
+}
+
+.despesa-card {
+    color: var(--cor-despesa);
+}
+
+.quick-access {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.quick-action {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+.quick-action:hover {
+    transform: translateY(-5px);
+}
+
+.quick-action-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.icon-despesa {
+    background-color: #ffeeee;
+    color: var(--cor-despesa);
+}
+
+.icon-receita {
+    background-color: #eeffee;
+    color: var(--cor-receita);
+}
+
+.icon-transfer {
+    background-color: #eeeeff;
+    color: var(--cor-secundaria);
+}
+
+.quick-action-label {
+    font-size: 12px;
+    color: var(--cor-texto-secundario);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/* Tabelas */
+.table {
+    margin-bottom: 0;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead th {
+    background-color: var(--cor-fundo);
+    border-bottom: 1px solid var(--cor-borda);
+    font-weight: 600;
+    padding: 12px 15px;
+    font-size: 14px;
+    color: var(--cor-texto-secundario);
+    text-transform: uppercase;
+}
+
+.table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(52, 199, 89, 0.05);
+}
+
+/* Progress Bar */
+.progress {
+    border-radius: 50px;
+    height: 10px;
+    background-color: #e9ecef;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    border-radius: 50px;
+    background-color: var(--cor-primaria);
+}
+
+.progress-despesa .progress-bar {
+    background-color: var(--cor-despesa);
+}
+
+/* Badges */
+.badge {
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 50px;
+    font-size: 12px;
+}
+
+.badge-receita {
+    background-color: rgba(52, 199, 89, 0.1);
+    color: var(--cor-receita);
+}
+
+.badge-despesa {
+    background-color: rgba(249, 98, 98, 0.1);
+    color: var(--cor-despesa);
+}
+
+/* Login e autenticação */
+.auth-container {
+    max-width: 420px;
+    margin: 60px auto;
+    padding: 35px;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.auth-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-logo h1 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin: 0;
+}
+
+.auth-logo i {
+    color: var(--secondary-color);
+}
+
+.auth-divider {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.auth-divider:before, .auth-divider:after {
+    content: "";
+    display: block;
+    width: 45%;
+    height: 1px;
+    background: var(--border-color);
+    position: absolute;
+    top: 50%;
+}
+
+.auth-divider:before {
+    left: 0;
+}
+
+.auth-divider:after {
+    right: 0;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.auth-footer p {
+    margin: 0;
+    color: var(--light-text);
+}
+
+.forgot-password {
+    display: block;
+    text-align: right;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.alert {
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.alert-danger {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--danger-color);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: var(--success-color);
+    border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.alert-warning {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: var(--warning-color);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+/* Footer fixo na parte inferior */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    flex: 1 0 auto;
+    width: 100%;
+}
+
+footer {
+    flex-shrink: 0;
+    background-color: #212529 !important;
+    color: white !important;
+    width: 100%;
+    padding: 15px 0;
+    margin-top: auto;
+    position: relative;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .card {
+        margin-bottom: 15px;
+    }
+    
+    .btn {
+        padding: 8px 16px;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+    }
+    
+    .dashboard-greeting {
+        font-size: 20px;
+    }
+    
+    .dashboard-username {
+        font-size: 24px;
+    }
+    
+    .auth-container {
+        margin: 40px auto;
+        padding: 20px;
+    }
+    
+    .quick-action-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .auth-container {
+        padding: 25px;
+        margin: 30px 15px;
+    }
+}
+
+/* Estilos para melhorar a aparência dos formulários */
+.form-control {
+    background-color: #ffffff !important;
+    border: 1px solid #ced4da !important;
+}
+
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card-header {
+    border-bottom: none;
+    padding: 1rem;
+}
+
+/* Ajuste refinado para alinhamento dos ícones nos inputs */
+.input-group {
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin: 0;
+}
+
+.input-group-text i {
+    font-size: 16px;
+    display: block;
+    text-align: center;
+    line-height: 1;
+}
+
+.input-group .form-control {
+    height: 46px;
+    border-left: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 0.75rem;
+    box-shadow: none;
+}
+
+/* Estilo para centralizar conteúdo de login/cadastro */
+.auth-centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+/* Centralização vertical do conteúdo */
+#main-content {
+    min-height: calc(100vh - 130px); /* Altura total menos header e footer */
+}
+
+/* Restaurando botões */
+.btn-success, .btn-primary {
+    background-color: #34c759;
+    border-color: #34c759;
+}
+
+.btn-success:hover, .btn-primary:hover {
+    background-color: #2db54f;
+    border-color: #2db54f;
+}
+
+/* Estilos específicos para os campos do formulário de cadastro */
+#id_username, #id_email, #id_password1, #id_password2,
+[id^="id_username"], [id^="id_email"], [id^="id_password"] {
+    height: 46px !important;
+    border-left: 0 !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    box-shadow: none !important;
+}
+
+/* Garantir alinhamento perfeito nos formulários em todos os navegadores */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+    height: 46px !important;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    .input-group-text {
+        height: 46px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+} 
+
+/* Nova abordagem: ícones dentro das caixas de texto */
+.form-control-icon {
+    position: relative;
+}
+
+.form-control-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    z-index: 10;
+}
+
+.form-control-icon .form-control {
+    padding-left: 45px;
+    height: 46px;
+    border-radius: 4px;
+    background-color: #fff !important;
+}
+
+/* Ajustes adicionais para elementos select e input date com ícones */
+.form-control-icon select.form-control {
+    padding-left: 45px;
+    height: 46px;
+    appearance: auto;
+    background-color: #fff !important;
+}
+
+.form-control-icon input[type="date"].form-control {
+    padding-left: 45px;
+    height: 46px;
+    background-color: #fff !important;
+}
+
+/* Ajuste para o campo de número */
+.form-control-icon input[type="number"].form-control {
+    padding-left: 45px;
+    height: 46px;
+    background-color: #fff !important;
+} 

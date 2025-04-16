@@ -2,7 +2,6 @@
 
 Um aplicativo web para controle financeiro pessoal, desenvolvido com Django. Gerencie suas despesas por categorias, visualize relatórios e mantenha controle do seu orçamento.
 
-![Gestor Financeiro](https://via.placeholder.com/800x400?text=Gestor+Financeiro)
 
 ## ✨ Recursos
 
